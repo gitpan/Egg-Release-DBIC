@@ -2,12 +2,12 @@ package Egg::Release::DBIC;
 #
 # Masatoshi Mizuno E<lt>lusheE<64>cpan.orgE<gt>
 #
-# $Id: DBIC.pm 251 2008-02-14 17:47:23Z lushe $
+# $Id: DBIC.pm 259 2008-02-15 13:59:27Z lushe $
 #
 use strict;
 use warnings;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 1;
 

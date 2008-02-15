@@ -2,7 +2,7 @@ package Egg::Model::DBIC;
 #
 # Masatoshi Mizuno E<lt>lusheE<64>cpan.orgE<gt>
 #
-# $Id: DBIC.pm 251 2008-02-14 17:47:23Z lushe $
+# $Id: DBIC.pm 259 2008-02-15 13:59:27Z lushe $
 #
 use strict;
 use warnings;
@@ -28,7 +28,7 @@ sub _setup {
 	my $schemas= $e->ixhash;
 	no strict 'refs';  ## no critic.
 	no warnings 'redefine';
-	for (sort (grep /\.pm$/, <$dbic_path/*>)) {
+	for (sort (grep /\.pm$/, <$dbic_path/*>)) {  ## no critic.
 		m{([^\\\/\:]+)\.pm$} || next;
 		my $pkg = $e->project_name. "::Model::DBIC::$1";
 		my $name= lc $1;
