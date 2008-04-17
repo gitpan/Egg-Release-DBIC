@@ -2,12 +2,12 @@ package Egg::Model::DBIC;
 #
 # Masatoshi Mizuno E<lt>lusheE<64>cpan.orgE<gt>
 #
-# $Id: DBIC.pm 259 2008-02-15 13:59:27Z lushe $
+# $Id: DBIC.pm 324 2008-04-17 12:45:09Z lushe $
 #
 use strict;
 use warnings;
 
-our $VERSION = '3.00';
+our $VERSION = '3.01';
 
 sub _setup {
 	my($class, $e)= @_;

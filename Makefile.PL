@@ -1,6 +1,6 @@
 use inc::Module::Install;
 
-name          'Egg\-Release\-DBIC';
+name          'Egg-Release-DBIC';
 all_from      'lib/Egg/Release/DBIC.pm';
 version_from  'lib/Egg/Release/DBIC.pm';
 abstract_from 'lib/Egg/Release/DBIC.pm';
