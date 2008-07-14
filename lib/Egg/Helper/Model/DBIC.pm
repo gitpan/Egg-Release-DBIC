@@ -2,7 +2,7 @@ package Egg::Helper::Model::DBIC;
 #
 # Masatoshi Mizuno E<lt>lusheE<64>cpan.orgE<gt>
 #
-# $Id: DBIC.pm 251 2008-02-14 17:47:23Z lushe $
+# $Id: DBIC.pm 352 2008-07-14 13:26:41Z lushe $
 #
 use strict;
 use warnings;
@@ -29,10 +29,17 @@ sub _start_helper {
 	$o->{password} ||= "";
 	$o->{dsn}.= ";host=$o->{host}"      if $o->{host};
 	$o->{dsn}.= ";port=$o->{inet_port}" if $o->{inet_port};
-	my $lib_path= $c->{dir}{lib_project};
-	my $schema_path= "$lib_path/Model/DBIC/$schema_name.pm";
-	-e $lib_path
-	   || return $self->_helper_help("'$lib_path' is not found.");
+	my $param= $self->helper_prepare_param({
+	  module_version=> $version, dbi=> $o,
+	  created=> __PACKAGE__. " v$VERSION",
+	  });
+	$self->helper_prepare_param_module
+	   ($param, $self->project_name, qw/ Model DBIC /, $schema_name);
+	my $lib_path   = "$param->{output_path}/lib/$param->{module_basedir}";
+	my $schema_path= "$param->{output_path}/lib/$param->{module_filepath}";
+	unless (-e $lib_path) {
+		$self->helper_create_dir($lib_path);
+	}
 	-e $schema_path
 	   and return $self->_helper_help("'$schema_path' already exists.");
 

@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use Carp qw/ croak /;
 
-our $VERSION = '0.01';
+our $VERSION = '0.03';
 
 sub _setup {
 	my($e)= @_;
@@ -62,6 +62,10 @@ sub _setup {
 			$_[0]->{"dbic_schema_$s_name"} ||= $_[0]->model($label);
 		  };
 		my $begin_code= $schema->storage->dbh->{AutoCommit} ? do {
+			*{"${project}::commit_$s_name"}   = sub { 1 };
+			*{"${project}::rollback_$s_name"} = sub { 1 };
+			sub { 1 };
+		  }: do {
 			*{"${project}::commit_$s_name"}= sub {
 				my($self)= @_;
 				$self->dbh($label)->txn_commit;
@@ -78,10 +82,6 @@ sub _setup {
 				$_[1]->txn_begin;
 				$_[0]->debug_out("# + DBIC '$label' Transaction Start.");
 			  };
-		  }: do {
-			*{"${project}::commit_$s_name"}   = sub { 1 };
-			*{"${project}::rollback_$s_name"} = sub { 1 };
-			sub { 1 };
 		  };
 		*{"${project}::begin_$s_name"}= sub {
 			my($self)= @_;

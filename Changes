@@ -1,5 +1,11 @@
 Revision history for Perl extension .
 
+0.05  2008/07/14
+	- bugfix for Egg::Helper::Model::DBIC.
+
+0.04  2008/06/22
+	- bugfix for Egg::Plugin::DBIC.
+
 0.03  2008/04/17
 	- Build.PL is abolished.
 
